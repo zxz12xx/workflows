@@ -39,7 +39,7 @@
           if (data.gear_stock) {
             pesan += "\n⚙️ **Gear Stock:**\n";
             data.gear_stock.forEach(item => {
-              pesan += `- ${item.display_name} (Qty: ${item.quantity})\n`;
+              pesan += `- ${item.display_name} (Qty: ${item.quantity})\nRESET : 3 MINUTES \ninfo: http://growagardeninfo.gamer.gd/\n`;
             });
           }
           await kirimDiscord(pesan);
