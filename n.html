@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Grow a Garden Notif</title>
+</head>
+<body>
+  <h2>🚀 Notif Tester</h2>
+  <button onclick="kirimNotif()">Kirim Notif ke Discord</button>
+
+  <script>
+    async function kirimNotif() {
+      const webhookUrl = "https://discord.com/api/webhooks/1414058721637564580/yr1FG_SmaWsQvOUBjCuMvSfHulCdtel9UeRAiKyzOCFpf6PNRpZGGxg_UlWrcBsnUn0g";
+
+      const data = {
+        content: "🔥 Cek stok Grow a Garden, ada item baru yang ready!"
+      };
+
+      try {
+        let res = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          alert("✅ Notif terkirim ke Discord!");
+        } else {
+          alert("❌ Gagal kirim notif: " + res.status);
+        }
+      } catch (e) {
+        alert("⚠️ Error: " + e.message);
+      }
+    }
+  </script>
+</body>
+</html>
