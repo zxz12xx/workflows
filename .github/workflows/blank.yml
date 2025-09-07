@@ -1,16 +1,21 @@
-name: Kirim Notif ke Discord
+name: Grow a Garden Notif
 
 on:
   schedule:
-    - cron: "*/4 * * * *" # jalan tiap 4 menit sekali
-  workflow_dispatch: # bisa dijalankan manual juga
+    - cron: "*/4 * * * *" # jalan tiap 5 menit
+  workflow_dispatch: # bisa jalanin manual dari GitHub Actions tab
 
 jobs:
-  send-message:
+  check-and-send:
     runs-on: ubuntu-latest
     steps:
-      - name: Kirim ke Discord
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cek stock dan kirim ke Discord
         run: |
+          RESPONSE=$(curl -s "https://growagardeninfo.gamer.gd/stock.php")
+          MSG="📦 Stock Update:\n\`\`\`$RESPONSE\`\`\`"
           curl -H "Content-Type: application/json" \
-          -d '{"content":"🔥 Cek stok Grow a Garden, ada item baru yang ready!"}' \
-          ${{ secrets.DISCORD_WEBHOOK }}
+               -d "{\"content\": \"$MSG\"}" \
+               ${{ secrets.DISCORD_WEBHOOK }}
