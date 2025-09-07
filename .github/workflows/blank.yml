@@ -1,0 +1,16 @@
+name: Kirim Notif ke Discord
+
+on:
+  schedule:
+    - cron: "*/4 * * * *" # jalan tiap 4 menit sekali
+  workflow_dispatch: # bisa dijalankan manual juga
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kirim ke Discord
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d '{"content":"🔥 Cek stok Grow a Garden, ada item baru yang ready!"}' \
+          ${{ secrets.DISCORD_WEBHOOK }}
